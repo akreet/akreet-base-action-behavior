@@ -1,0 +1,21 @@
+{
+  "name": "akreet-base-action-behavior",
+  "homepage": "https://github.com/akreet/akreet-base-action-behavior",
+  "authors": [
+    "admin@akreet.net"
+  ],
+  "description": "",
+  "main": "akreet-base-action-behavior.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "akreet-http-util": "akreet/akreet-http-util",
+    "tv4": "geraintluff/tv4#^1.2.7"
+  }
+}
