@@ -308,7 +308,7 @@
          */
         saveContentStore: function (payload, files, callback) {
             if(!this._schema) {
-                throw 'Attempting to save with payload but there is no schema set');
+                throw 'Attempting to save with payload but there is no schema set';
             }
 
             if(!tv4.validate(payload, this._schema.schema)) {
