@@ -152,9 +152,14 @@
                 ).then(
                         function (request) {
                             if (request.response.status === 'ok') {
-                                this._schema = request.response.schema;
-                                this._acceptsSchemas = request.response.acceptsSchema;
-                                console.log('[_setSchema] schema set: ' + JSON.stringify(this._schema, null, 4));
+                                if(request.response.schema) {
+                                    this._schema = request.response.schema;
+                                    console.log('[_setSchema] schema set: ' + JSON.stringify(this._schema, null, 4));
+                                }
+                                if(request.response.acceptsSchema) {
+                                    this._acceptsSchemas = request.response.acceptsSchema;
+                                    console.log('[_setSchema] schema set: ' + JSON.stringify(this._schema, null, 4));
+                                }
                                 callback();
                             } else {
                                 callback();
