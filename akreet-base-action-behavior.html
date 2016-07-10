@@ -157,7 +157,7 @@
                                 console.log('[_setSchema] schema set: ' + JSON.stringify(this._schema, null, 4));
                                 callback();
                             } else {
-                                this.handleErrorResponse(request.response.response);
+                                this.handleErrorResponse(request.response);
                             }
                         }.bind(this)
                 ).catch(
