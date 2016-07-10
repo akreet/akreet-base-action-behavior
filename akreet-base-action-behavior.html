@@ -157,7 +157,7 @@
                                 console.log('[_setSchema] schema set: ' + JSON.stringify(this._schema, null, 4));
                                 callback();
                             } else {
-                                this.handleErrorResponse(request.response);
+                                callback();
                             }
                         }.bind(this)
                 ).catch(
@@ -307,6 +307,10 @@
          * @param {Function} callback
          */
         saveContentStore: function (payload, files, callback) {
+            if(!this._schema) {
+                throw 'Attempting to save with payload but there is no schema set');
+            }
+
             if(!tv4.validate(payload, this._schema.schema)) {
                 var errors = tv4.error;
                 throw 'Payload does not conform to action schema: ' + JSON.stringify(errors, null, 4);
