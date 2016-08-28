@@ -132,6 +132,16 @@
                     return [];
                 }
 
+            },
+
+            /**
+             * This holds an array of override objects.
+             */
+            _overrideProperties: {
+                type: Array,
+                value: function() {
+                    return [];
+                }
             }
         },
 
@@ -211,6 +221,12 @@
             } else {
                 throw 'expected to find parentDomain and actionId in url query params';
             }
+
+
+            // this will set the overrideProperties
+            this.loadOverrideProperties(this.actionId, function(overrideProperties) {
+                this._overrideProperties = overrideProperties;
+            }.bind(this));
 
             // this set the schema and acceptsSchemas
             this._setSchema(function() {
@@ -475,6 +491,35 @@
          */
         handleException: function(exception) {
             throw 'exception from server: ' + JSON.stringify(exception);
+        },
+
+        /**
+         * This will retrieve the overrideProperties for this action.
+         */
+        loadOverrideProperties: function(actionId, callback) {
+            document.createElement('iron-request').send(
+                    {
+                        url: this.parentDomain + '/action/getOverrideProperties',
+                        method: 'GET',
+                        handleAs: 'json',
+                        params: {
+                            actionId: actionId
+                        }
+                    }
+            ).then(
+                    function (response) {
+                        if(response.status === 'ok') {
+                            callback(response.overrideProperties);
+                        } else {
+                            this.handleErrorResponse(response);
+                        }
+                    }
+            ).catch(
+                    function(exception) {
+                        this.handleException(exception);
+                    }.bind(this)
+            );
+
         },
 
         /**
