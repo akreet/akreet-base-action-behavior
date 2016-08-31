@@ -132,6 +132,16 @@
                     return [];
                 }
 
+            },
+
+            /**
+             * This holds an array of override objects.
+             */
+            _overrideProperties: {
+                type: Array,
+                value: function() {
+                    return [];
+                }
             }
         },
 
@@ -212,6 +222,10 @@
                 throw 'expected to find parentDomain and actionId in url query params';
             }
 
+
+            // this will set the overrideProperties
+            this.loadOverrideProperties(this.actionId, this._onLoadOverrideProperties.bind(this));
+
             // this set the schema and acceptsSchemas
             this._setSchema(function() {
 
@@ -284,6 +298,9 @@
                             break;
                         case /^akreet:event-cancel$/i.test(type):
                             this.onEventCancelReceived(eventData.data);
+                            break;
+                        case /^akreet:load-override-properties$/i.test(type):
+                            this.onLoadOverridePropertiesReceived(eventData.data);
                             break;
                         default:
                             console.log('did you forget to handle this case: ' + type);
@@ -475,6 +492,64 @@
          */
         handleException: function(exception) {
             throw 'exception from server: ' + JSON.stringify(exception);
+        },
+
+        /**
+         * This will retrieve the overrideProperties for this action.
+         */
+        loadOverrideProperties: function(actionId, callback) {
+            document.createElement('iron-request').send(
+                    {
+                        url: this.parentDomain + '/action/getOverrideProperties',
+                        method: 'GET',
+                        handleAs: 'json',
+                        params: {
+                            actionId: actionId
+                        }
+                    }
+            ).then(
+                    function (response) {
+                        if(response.status === 'ok') {
+                            callback(response.overrideProperties);
+                        } else {
+                            this.handleErrorResponse(response);
+                        }
+                    }
+            ).catch(
+                    function(exception) {
+                        this.handleException(exception);
+                    }.bind(this)
+            );
+
+        },
+
+        _onLoadOverrideProperties: function(overrideProperties) {
+            function _toObject(array) {
+                var _obj = [];
+                if(array && array.length) {
+                    array.forEach(function(entry) {
+                        _obj[entry.key] = entry.value;
+                    });
+                }
+                return _obj;
+            }
+
+            // convert to maps
+            var _overridePropertiesMap = _toObject(this._overrideProperties);
+            var overridePropertiesMap = _toObject(this.overrideProperties);
+
+            // combine the maps
+            Object.keys(overridePropertiesMap).map(function(key) {
+                _overridePropertiesMap[key] = overridePropertiesMap[key];
+            });
+
+            // back to key value entries
+            var newOverrideProperties = [];
+            Object.keys(_overridePropertiesMap).map(function(key) {
+                newOverrideProperties.push({ key: key, value: _overridePropertiesMap[key] });
+            });
+
+            this._overrideProperties = newOverrideProperties;
         },
 
         /**
