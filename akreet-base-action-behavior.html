@@ -300,7 +300,7 @@
                             this.onEventCancelReceived(eventData.data);
                             break;
                         case /^akreet:load-override-properties$/i.test(type):
-                            this.onLoadOverridePropertiesReceived(eventData.data);
+                            this._onLoadOverrideProperties(eventData.data);
                             break;
                         default:
                             console.log('did you forget to handle this case: ' + type);
