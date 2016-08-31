@@ -500,7 +500,7 @@
         loadOverrideProperties: function(actionId, callback) {
             document.createElement('iron-request').send(
                     {
-                        url: this.parentDomain + '/actionv1/getOverrideProperties?' + HttpUtil.toQueryString({
+                        url: this.parentDomain + '/action/getOverrideProperties?' + HttpUtil.toQueryString({
                             actionId: actionId
                         }),
                         method: 'GET',
