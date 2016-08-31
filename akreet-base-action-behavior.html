@@ -508,11 +508,7 @@
                     }
             ).then(
                     function (response) {
-                        if(response.status === 'ok') {
-                            callback(response.overrideProperties);
-                        } else {
-                            this.handleErrorResponse(response);
-                        }
+                        callback(response.overrideProperties);
                     }
             ).catch(
                     function(exception) {
