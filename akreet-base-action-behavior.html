@@ -224,9 +224,7 @@
 
 
             // this will set the overrideProperties
-            this.loadOverrideProperties(this.actionId, function(overrideProperties) {
-                this._overrideProperties = overrideProperties;
-            }.bind(this));
+            this.loadOverrideProperties(this.actionId, this._onLoadOverrideProperties.bind(this));
 
             // this set the schema and acceptsSchemas
             this._setSchema(function() {
@@ -300,6 +298,9 @@
                             break;
                         case /^akreet:event-cancel$/i.test(type):
                             this.onEventCancelReceived(eventData.data);
+                            break;
+                        case /^akreet:load-override-properties$/i.test(type):
+                            this.onLoadOverridePropertiesReceived(eventData.data);
                             break;
                         default:
                             console.log('did you forget to handle this case: ' + type);
@@ -520,6 +521,35 @@
                     }.bind(this)
             );
 
+        },
+
+        _onLoadOverrideProperties: function(overrideProperties) {
+            function _toObject(array) {
+                var _obj = [];
+                if(array && array.length) {
+                    array.forEach(function(entry) {
+                        _obj[entry.key] = entry.value;
+                    });
+                }
+                return _obj;
+            }
+
+            // convert to maps
+            var _overridePropertiesMap = _toObject(this._overrideProperties);
+            var overridePropertiesMap = _toObject(this.overrideProperties);
+
+            // combine the maps
+            Object.keys(overridePropertiesMap).map(function(key) {
+                _overridePropertiesMap[key] = overridePropertiesMap[key];
+            });
+
+            // back to key value entries
+            var newOverrideProperties = [];
+            Object.keys(_overridePropertiesMap).map(function(key) {
+                newOverrideProperties.push({ key: key, value: _overridePropertiesMap[key] });
+            });
+
+            this._overrideProperties = newOverrideProperties;
         },
 
         /**
