@@ -143,7 +143,27 @@
                 value: function() {
                     return [];
                 }
+            },
+
+            /**
+             * This holds the override properties as a map
+             */
+            overrideProperties: {
+                type: Object,
+                computed: '_computeOverrideProperties(_overrideProperties.*)'
             }
+
+
+        },
+
+        _computeOverrideProperties: function(changes) {
+            var map = {};
+            if(changes.base && changes.base.length) {
+                changes.forEach(function(entry) {
+                    map[entry.key] = entry.value;
+                });
+            }
+            return map;
         },
 
         /**
