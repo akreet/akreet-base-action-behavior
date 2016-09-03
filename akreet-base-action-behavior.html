@@ -4,16 +4,6 @@
 <link rel="import" href="tv4.html">
 <script>
     akreet = window.akreet || {};
-    akreet.OverrideProperties = akreet.OverrideProperties || {}
-
-    akreet.OverridePropertiesBehavior = {
-        overrideProperty: function(key) {
-            if(akreet.OverrideProperties[key]) {
-                return akreet.OverrideProperties[key];
-            }
-            return null;
-        }
-    }
 
     akreet.BaseActionBehavior = {
 
@@ -557,12 +547,6 @@
             });
 
             this._overrideProperties = newOverrideProperties;
-        },
-
-        _onOverridePropertiesChange: function() {
-            if(this._overrideProperties) {
-                akreet.OverrideProperties = this._overrideProperties;
-            }
         },
 
         /**
