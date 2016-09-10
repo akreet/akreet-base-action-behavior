@@ -26,6 +26,21 @@
     akreet.OverridePropertiesManager = OverridePropertiesManager;
 
     // =================================================================================================================
+    // OverridePropertiesBehavior
+    //   Use this behavior to unleash the power of the OverridePropertiesManager in the Polymer custom elements.
+    // =================================================================================================================
+    akreet.OverridePropertiesBehavior = {
+
+        asBoolean: function(name) {
+            if(this.overrideProperties) {
+                return this.overrideProperties.asBoolean(name);
+            }
+        }
+
+    };
+
+
+    // =================================================================================================================
     // BaseActionBehavior
     //   The main behavior that all all applications must extends to be able to send data back and forth between
     //   the extending application the core Akreet application.
