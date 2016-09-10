@@ -7,34 +7,16 @@
     akreet = window.akreet || {};
 
     // =================================================================================================================
-    // OverridePropertiesManager
-    //   Wraps and provides helper functions to manage the override properties.
-    // =================================================================================================================
-    var OverridePropertiesManager = function(overrideProperties) {
-        this.overrideProperties = overrideProperties;
-    };
-
-    OverridePropertiesManager.prototype.asBoolean = function(name) {
-        var property = _.find(this.overrideProperties, {key: name});
-        if(property) {
-            var value = property.value;
-            return Boolean(value);
-        }
-        return false;
-    };
-
-    akreet.OverridePropertiesManager = OverridePropertiesManager;
-
-    // =================================================================================================================
     // OverridePropertiesBehavior
     //   Use this behavior to unleash the power of the OverridePropertiesManager in the Polymer custom elements.
     // =================================================================================================================
     akreet.OverridePropertiesBehavior = {
 
-        asBoolean: function(name) {
-            if(this.overrideProperties) {
-                return this.overrideProperties.asBoolean(name);
+        asBoolean: function(overrideProperties, name) {
+            if(overrideProperties && overrideProperties[name]) {
+                return Boolean(overrideProperties[name].value);
             }
+            return false;
         }
 
     };
@@ -197,10 +179,13 @@
         },
 
         _computeOverrideProperties: function(changes) {
+            var map = {};
             if(changes.base && changes.base.length) {
-                return new akreet.OverridePropertiesManager(changes.base);
+                changes.forEach(function(entry) {
+                    map[entry.key] = entry.value;
+                });
             }
-            return new akreet.OverridePropertiesManager([]);
+            return map;
         },
 
         /**
