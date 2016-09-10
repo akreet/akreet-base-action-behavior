@@ -181,7 +181,7 @@
         _computeOverrideProperties: function(changes) {
             var map = {};
             if(changes.base && changes.base.length) {
-                changes.forEach(function(entry) {
+                changes.base.forEach(function(entry) {
                     map[entry.key] = entry.value;
                 });
             }
