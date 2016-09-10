@@ -17,6 +17,24 @@
                 return Boolean(overrideProperties[name].value);
             }
             return false;
+        },
+
+        /**
+         * If the value is a boolean and is true returns Boolean(true), else null.
+         * If the value is a string "true" return Boolean(true), else null
+         */
+        asPresent: function(overrideProperties, name) {
+            if(overrideProperties && overrideProperties[name]) {
+                if(true === overrideProperties[name]) {
+                    return true;
+                }
+
+                if('true' === overrideProperties[name]) {
+                    return true;
+                }
+
+            }
+            return null;
         }
 
     };
