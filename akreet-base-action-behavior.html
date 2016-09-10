@@ -14,7 +14,7 @@
 
         asBoolean: function(overrideProperties, name) {
             if(overrideProperties && overrideProperties[name]) {
-                return Boolean(overrideProperties[name].value);
+                return Boolean(overrideProperties[name]);
             }
             return false;
         },
