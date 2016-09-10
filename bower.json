@@ -16,7 +16,6 @@
   ],
   "dependencies": {
     "akreet-http-util": "akreet/akreet-http-util",
-    "tv4": "geraintluff/tv4#^1.2.7",
-    "lodash": "^4.15.0"
+    "tv4": "geraintluff/tv4#^1.2.7"
   }
 }
