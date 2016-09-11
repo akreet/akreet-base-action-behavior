@@ -12,9 +12,12 @@
     akreet.ActionHelperBehavior = {
 
         generateTitle: function() {
-            return "booyeah";
+            var randomChars = "(" + Math.random().toString(36).substring(2,3) + ")";
+            if(this._schema) {
+                return this._schema.name + "." + randomChars;
+            }
+            return randomChars;
         }
-
 
     };
 
