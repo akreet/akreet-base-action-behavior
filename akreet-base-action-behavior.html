@@ -302,7 +302,7 @@
 
 
             // this will set the overrideProperties
-            this.loadOverrideProperties(this.actionId, this._onLoadOverrideProperties.bind(this));
+            //this.loadOverrideProperties(this.actionId, this._onLoadOverrideProperties.bind(this));
 
             // this set the schema and acceptsSchemas
             this._setSchema(function() {
@@ -535,7 +535,7 @@
                         handleAs: 'json',
                         params: {
                             importAssetId: importAssetId
-                        },
+                        }
                     }
             ).then(
                     function (response) {
