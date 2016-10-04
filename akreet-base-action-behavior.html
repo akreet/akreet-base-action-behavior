@@ -205,18 +205,21 @@
              */
             overrideProperties: {
                 type: Object,
-                computed: '_computeOverrideProperties(_overrideProperties.*)'
+                computed: '_computeOverrideProperties(_overrideProperties)'
             }
 
 
         },
 
-        _computeOverrideProperties: function(changes) {
-            var map = {};
-            if(changes.base && changes.base.length) {
-                changes.base.forEach(function(entry) {
-                    map[entry.key] = entry.value;
-                });
+        _computeOverrideProperties: function() {
+            var map = null;
+            if(this._overrideProperties) {
+                map = {};
+                if(this._overrideProperties && this.overrideProperties.length) {
+                    this._overrideProperties.forEach(function(entry) {
+                        map[entry.key] = entry.value;
+                    });
+                }
             }
             return map;
         },
