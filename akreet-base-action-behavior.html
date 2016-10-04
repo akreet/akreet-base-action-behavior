@@ -215,7 +215,7 @@
             var map = null;
             if(this._overrideProperties) {
                 map = {};
-                if(this._overrideProperties && this.overrideProperties.length) {
+                if(this._overrideProperties && this._overrideProperties.length) {
                     this._overrideProperties.forEach(function(entry) {
                         map[entry.key] = entry.value;
                     });
