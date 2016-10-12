@@ -289,7 +289,7 @@
             if (this.parentDomain && this.actionId) {
                 // bind to window for message events
                 this.parentWindowEventListener = function (e) {
-                    console.log("[parentWindowEventListener] origin: " + e.origin + ", data: " + JSON.string(e.data));
+                    console.log("[parentWindowEventListener] origin: " + e.origin + ", data: " + JSON.stringify(e.data));
                     if (this.parentDomain && (e.origin === this.parentDomain)) {
                         this._dispatchEvent(e.data);
                     } else {
