@@ -595,10 +595,12 @@
         },
 
         _onLoadOverrideProperties: function(overrideProperties) {
-            this._overrideProperties = overrideProperties;
-            this.sendMessage({
-                type: 'akreet:override-properties-loaded'
-            });
+            this.async(function() {
+                this._overrideProperties = overrideProperties;
+                this.sendMessage({
+                    type: 'akreet:override-properties-loaded'
+                });
+            }.bind(this));
         },
 
         /**
