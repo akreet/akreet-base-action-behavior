@@ -371,9 +371,11 @@
                     switch (true) {
                         case /^akreet:event-save$/i.test(type):
                             this.onEventSaveReceived(eventData.data);
+                            this.detached();
                             break;
                         case /^akreet:event-cancel$/i.test(type):
                             this.onEventCancelReceived(eventData.data);
+                            this.detached();
                             break;
                         case /^akreet:load-override-properties$/i.test(type):
                             this._onLoadOverrideProperties(eventData.data);
