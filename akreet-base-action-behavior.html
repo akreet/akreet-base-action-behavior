@@ -268,7 +268,7 @@
          *
          * @method attached
          */
-        loadBaseAction: function () {
+        ready: function () {
             // resolve parentDomain
             this.parentDomain = HttpUtil.getParam('parentDomain');
             console.log('[ready] parentDomain: ' + this.parentDomain);
