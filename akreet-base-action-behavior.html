@@ -595,8 +595,9 @@
         },
 
         _onLoadOverrideProperties: function(overrideProperties) {
+            console.log("[_onLoadOverrideProperties] received overrideProperties: " + overrideProperties);
             this.async(function() {
-                this._overrideProperties = overrideProperties;
+                this._overrideProperties = _.clone(overrideProperties);
                 this.sendMessage({
                     type: 'akreet:override-properties-loaded'
                 });
