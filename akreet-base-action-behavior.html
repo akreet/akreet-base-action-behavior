@@ -268,7 +268,7 @@
          *
          * @method attached
          */
-        attached: function () {
+        ready: function () {
             // resolve parentDomain
             this.parentDomain = HttpUtil.getParam('parentDomain');
             console.log('[attached] parentDomain: ' + this.parentDomain);
