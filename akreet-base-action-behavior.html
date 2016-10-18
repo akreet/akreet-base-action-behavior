@@ -343,7 +343,7 @@
             }.bind(this));
 
             // add unload listener
-            window.addEventListener('unload', this.detached.bind(this));
+            window.addEventListener('unload', this._unload.bind(this));
         },
 
         /**
@@ -351,7 +351,7 @@
          *
          * @method detached
          */
-        detached: function () {
+        _unload: function () {
             window.removeEventListener('message', this.parentWindowEventListener);
             console.log('[detached] detached parentWindowEventListener');
         },
