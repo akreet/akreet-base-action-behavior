@@ -595,7 +595,7 @@
         },
 
         _onLoadOverrideProperties: function(overrideProperties) {
-            console.log("[_onLoadOverrideProperties] received overrideProperties: " + JSON.stringify(overrideProperties);
+            console.log("[_onLoadOverrideProperties] received overrideProperties: " + JSON.stringify(overrideProperties));
             this.async(function() {
                 this._overrideProperties = _.clone(overrideProperties);
                 this.sendMessage({
