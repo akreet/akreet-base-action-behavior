@@ -271,19 +271,19 @@
         ready: function () {
             // resolve parentDomain
             this.parentDomain = HttpUtil.getParam('parentDomain');
-            console.log('[attached] parentDomain: ' + this.parentDomain);
+            console.log('[ready] parentDomain: ' + this.parentDomain);
 
             // resolve actionId
             this.actionId = HttpUtil.getParam('actionId');
-            console.log('[attached] actionId: ' + this.actionId);
+            console.log('[ready] actionId: ' + this.actionId);
 
             // resolve userId
             this.userId = HttpUtil.getParam('userId');
-            console.log('[attached] userId: ' + this.userId);
+            console.log('[ready] userId: ' + this.userId);
 
             // resolve akreetId
             this.akreetId = HttpUtil.getParam('akreetId');
-            console.log('[attached] akreetId: ' + this.akreetId);
+            console.log('[ready] akreetId: ' + this.akreetId);
 
             // start listening to events from parent window
             if (this.parentDomain && this.actionId) {
@@ -297,7 +297,7 @@
                     }
                 }.bind(this);
                 window.addEventListener('message', this.parentWindowEventListener);
-                console.log('[attached] attached parentWindowEventListener');
+                console.log('[ready] attached parentWindowEventListener');
             } else {
                 throw 'expected to find parentDomain and actionId in url query params';
             }
@@ -308,14 +308,14 @@
                 // resolve edit
                 if(HttpUtil.isParamPresent('edit')) {
                     this.edit = HttpUtil.getParam('edit');
-                    console.log('[attached] edit: ' + this.edit);
+                    console.log('[ready] edit: ' + this.edit);
                 }
 
                 // resolve contentStoreId if edit is true
                 if(this.edit) {
                     // resolve contentStoreId
                     this.contentStoreId = HttpUtil.getParam('contentStoreId');
-                    console.log('[attached] contentStoreId: ' + this.contentStoreId);
+                    console.log('[ready] contentStoreId: ' + this.contentStoreId);
 
                     this.async(function() {
                         this.loadContentStore(this.contentStoreId);
@@ -325,7 +325,7 @@
                 // resolve akreetImportAsset
                 if(HttpUtil.isParamPresent('akreetImportAsset')) {
                     this.akreetImportAsset = HttpUtil.getParam('akreetImportAsset');
-                    console.log('[attached] akreetImportAsset: ' + this.akreetImportAsset);
+                    console.log('[ready] akreetImportAsset: ' + this.akreetImportAsset);
                 }
 
                 // if akreetImportAsset notify subclass to load import asset
@@ -333,7 +333,7 @@
                     // resolve contentStoreId
                     this.importAssetId = HttpUtil.getParam('importAssetId');
 
-                    console.log('[attached] importAssetId: ' + this.importAssetId);
+                    console.log('[ready] importAssetId: ' + this.importAssetId);
 
                     this.async(function() {
                         this.loadImportAsset(this.importAssetId);
