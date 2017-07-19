@@ -696,7 +696,7 @@
                 var findAcceptingSchema = function(contentStore) {
                     var acceptingSchema = null;
                     this._acceptsSchemas.forEach(function(schema) {
-                        if(schema.id === contentStore.metadata.schemaId) {
+                        if(schema.code === contentStore.metadata.schemaCode) {
                             acceptingSchema = schema;
                         }
                     }.bind(this));
